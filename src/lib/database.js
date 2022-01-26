@@ -1,6 +1,12 @@
 import { createClient } from '@supabase/supabase-js';
 
-// probably should move these to an env.
+// check if server is localhost
+const isLocalhost = () => {
+  return NODE_ENV !== 'production' && window.location.hostname === 'localhost';
+};
+
+// TODO: write a script to popoulate the ENV file from a gist
+// remove the .env
 export const supabase = createClient(import.meta.env.PUBLIC_SUPABASE_URL,
   import.meta.env.PUBLIC_SUPABASE_API_KEY);
 
