@@ -6,7 +6,7 @@ import SecondaryNav from './SecondaryNav.jsx';
 import Footer from './Footer.jsx';
 import GridDisplay from './GridDisplay.jsx';
 import ListDisplay from './ListDisplay.jsx';
-import { fetchRecommendations, fetchMyVotes } from '../lib/database';
+import { fetchWithSearch, fetchRecommendations, fetchMyVotes } from '../lib/database';
 import useSupabaseAuth from '../hooks/useSupabaseAuth';
 
 const activeLinkColumns = {
@@ -36,7 +36,7 @@ const PostsWrap = () => {
       return;
     }
     const { orderBy } = activeLinkColumns[activeLink];
-    fetchRecommendations(orderBy, limit).then((data) => {
+    fetchWithSearch(orderBy, limit).then((data) => {
       setFetchedData(data);
     });
   }, [activeLink, limit]);

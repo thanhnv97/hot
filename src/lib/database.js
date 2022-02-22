@@ -73,6 +73,19 @@ export async function fetchRecommendations(orderBy = 'total_stars', limit = 25) 
   return recommendations;
 }
 
+export async function fetchWithSearch(orderBy = 'total_stars', limit = 25, searchText) {
+  const { data: recommendations, error } = await supabase
+    .from('recommendations')
+    .select('repo_name, description,stars,issues, total_stars, avg_recency_score, contributors, votes')
+    .textSearch('repo_name', `'${searchText}'`)
+    .limit(limit)
+    .order(orderBy, { ascending: false });
+
+  console.error(error);
+
+  return recommendations;
+}
+
 export async function fetchMyVotes(user) {
   const githubId = user.user_metadata.sub;
 
